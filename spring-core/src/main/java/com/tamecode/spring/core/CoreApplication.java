@@ -11,7 +11,9 @@ public class CoreApplication {
 
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
+        // 注册勾子，实现优雅关机
         context.registerShutdownHook();
+        context.getEnvironment().setActiveProfiles();
         SimpleBean bean = context.getBean(SimpleBean.class);
         bean.sayHello();
         context.close();
