@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class CoreApplication {
 
     public static void main(String[] args) {
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml", "application-bean.xml");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
         context.registerShutdownHook();
         SimpleBean bean = context.getBean(SimpleBean.class);
