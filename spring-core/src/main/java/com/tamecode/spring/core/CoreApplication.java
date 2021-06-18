@@ -13,8 +13,12 @@ public class CoreApplication {
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml", "application-bean.xml");
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
         context.registerShutdownHook();
-        SimpleBean bean = context.getBean(SimpleBean.class);
+//        SimpleBean bean = context.getBean("simpleBean", SimpleBean.class);
+        // 使用别名进行查找bean，本质上和simpleBean使用的是同一个对象。
+        SimpleBean bean = context.getBean("simpleBean2", SimpleBean.class);
         bean.sayHello();
+        Object staticSimpleBean = context.getBean("staticSimpleBean");
+        System.out.println(staticSimpleBean);
         context.close();
     }
 

@@ -5,8 +5,42 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!-- bean definitions here -->
-    <bean id="simpleBean" class="com.tamecode.spring.core.bean.SimpleBean"/>
+    <!--
+        bean definitions here
+        id: 在同一容器中要唯一
+        name: 是别名，可以有多个，使用逗号或者空格隔开
+        factory-method: 工厂方法，调用 bean 中的静态方法，返回的存活的对象将会视为通过调用构造函数创建的对象。例如管理单例模式的bean
+     -->
+    <bean id="simpleBean" name="simpleBean2, simpleBean3"
+          class="com.tamecode.spring.core.bean.SimpleBean"
+          factory-method="createInstance"
+    />
+
+    <!-- 类和内部的静态嵌套类之间使用 “$” 来连接。经测试使用 “.” 也是可以的。 -->
+<!--    <bean id="staticSimpleBean" class="com.tamecode.spring.core.bean.SimpleBean$StaticSimpleBean"/>-->
+    <bean id="staticSimpleBean" class="com.tamecode.spring.core.bean.SimpleBean.StaticSimpleBean"/>
+
+    <!--  给 simpleBean 起别名  -->
+    <alias name="simpleBean" alias="simpleBean2"/>
+
+    <!--
+        通过一个类的非静态方法返回的对象来创建 bean
+        通过 {@link DefaultServiceLocator#createClientServiceInstance} 返回的对象来创建一个bean
+        一个工厂类可以包含多个工厂方法，在 DefaultServiceLocator 可以包含多个创建 bean 的方法
+    -->
+    <!-- the factory bean, which contains a method called createInstance() -->
+    <bean id="serviceLocator" class="com.tamecode.spring.core.bean.DefaultServiceLocator">
+        <!-- inject any dependencies required by this locator bean -->
+    </bean>
+
+    <!-- the bean to be created via the factory bean -->
+    <bean id="clientService"
+          factory-bean="serviceLocator"
+          factory-method="createClientServiceInstance"/>
+
+    <bean id="accountService"
+          factory-bean="serviceLocator"
+          factory-method="createAccountServiceInstance"/>
 
 
 </beans>
