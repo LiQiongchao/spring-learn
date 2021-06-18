@@ -42,5 +42,21 @@
           factory-bean="serviceLocator"
           factory-method="createAccountServiceInstance"/>
 
+    <!--
+        构造器注入：
+            默认是按入参的顺序传参，也可以指定参数的类型，参数的位置，参数名等方式。
+    -->
+    <bean id="exampleBean" class="com.tamecode.spring.core.bean.ExampleBean">
+        <constructor-arg value="7500000"/>
+        <constructor-arg value="42"/>
+<!--        <constructor-arg type="int" value="7500000"/>-->
+<!--        <constructor-arg type="java.lang.String" value="42"/>-->
+
+<!--        <constructor-arg index="0" value="7500000"/>-->
+<!--        <constructor-arg index="1" value="42"/>-->
+
+<!--        <constructor-arg name="years" value="7500000"/>-->
+<!--        <constructor-arg name="ultimateAnswer" value="42"/>-->
+    </bean>
 
 </beans>
