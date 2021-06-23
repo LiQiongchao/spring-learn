@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  import other xml config  -->
+
+    <!--  classpath: 是指项目的 resources 的目录下。
+    classpath*: 是在所有项目（包括引用的项目）的resources目录下搜索 application-bean.xml 文件  -->
+    <!--<import resource="application-bean.xml"/>-->
+    <import resource="classpath:application-bean.xml"/>
+    <!-- <import resource="classpath*:application-bean.xml"/> -->
+
+
+</beans>
