@@ -59,4 +59,18 @@
 <!--        <constructor-arg name="ultimateAnswer" value="42"/>-->
     </bean>
 
+    <!-- 使用 setter 方法注入 -->
+    <bean id="simpleMovieLister" class="com.tamecode.spring.core.bean.SimpleMovieLister">
+        <property name="movieFinder" ref="simpleBean"/>
+    </bean>
+
+    <!--
+        调用工厂方法来创建bean，并传递工厂方法的参数
+     -->
+    <bean id="staticArgsBean" class="com.tamecode.spring.core.bean.StaticArgsBean" factory-method="createInstance">
+        <constructor-arg value="jimmy"/>
+        <constructor-arg value="18"/>
+        <constructor-arg value="男"/>
+    </bean>
+
 </beans>
