@@ -10,9 +10,19 @@ public class SimpleMovieLister {
     // the SimpleMovieLister has a dependency on the MovieFinder
     private SimpleBean movieFinder;
 
+    private String stringField;
+
     // a setter method so that the Spring container can inject a MovieFinder
     public void setMovieFinder(SimpleBean movieFinder) {
         this.movieFinder = movieFinder;
+    }
+
+    public String getStringField() {
+        return stringField;
+    }
+
+    public void setStringField(String stringField) {
+        this.stringField = stringField;
     }
 
     // business logic that actually uses the injected MovieFinder is omitted...

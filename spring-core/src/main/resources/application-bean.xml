@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -71,6 +71,50 @@
         <constructor-arg value="jimmy"/>
         <constructor-arg value="18"/>
         <constructor-arg value="男"/>
+    </bean>
+
+
+    <!--
+        设置属性值的方式
+            1- 使用 <property> 标签
+            2- 使用 P 名称空间
+            3- 使用 java.util.Properties 实例配置
+    -->
+    <bean id="myDataSource1" class="com.tamecode.spring.core.bean.BasicDataSource" destroy-method="close">
+        <!-- results in a setDriverClassName(String) call -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/mydb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="misterkaoli"/>
+    </bean>
+
+    <bean id="myDataSource2" class="com.tamecode.spring.core.bean.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://localhost:3306/mydb"
+          p:username="root"
+          p:password="misterkaoli"/>
+
+    <!-- 使用 PropertyEditor 解析成一个 java.util.Properties 的bean，再赋值给 properties 的属性 -->
+    <bean id="mappings"
+          class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <!-- typed as a java.util.Properties -->
+        <property name="properties">
+            <value>
+                jdbc.driver.className=com.mysql.jdbc.Driver
+                jdbc.url=jdbc:mysql://localhost:3306/mydb
+            </value>
+        </property>
+    </bean>
+
+    <!--
+        idref: 是指引用一个bean的名，作为字符串使用，与直接使用字符串的区别在于 idref 会去验证这个 bean 的 id 是否存在。
+     -->
+    <bean id="simpleMovieLister" class="com.tamecode.spring.core.bean.SimpleMovieLister">
+        <property name="stringField">
+            <idref bean="simpleBean"/>
+            <!-- <value>simpleBean</value>-->
+        </property>
     </bean>
 
 </beans>
