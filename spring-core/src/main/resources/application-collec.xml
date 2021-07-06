@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        集合的定义与使用
+        集合的合并：
+            子集合会覆盖重写父集合的值
+            list中父类的元素在所有的子元素之前
+
+
+    -->
+    <bean id="myDataSource"/>
+
+    <bean class="com.tamecode.spring.core.bean.collection.CollectionBean" id="collectionBean">
+        <!-- results in a setAdminEmails(java.util.Properties) call -->
+        <property name="adminEmails">
+            <props>
+                <prop key="administrator">administrator@example.org</prop>
+                <prop key="support">support@example.org</prop>
+                <prop key="development">development@example.org</prop>
+            </props>
+        </property>
+        <!-- results in a setSomeList(java.util.List) call -->
+        <property name="someList">
+            <list>
+                <value>a list element followed by a reference</value>
+                <ref bean="myDataSource" />
+            </list>
+        </property>
+        <!-- results in a setSomeMap(java.util.Map) call -->
+        <property name="someMap">
+            <map>
+                <entry key="an entry" value="just some string"/>
+                <entry key ="a ref" value-ref="myDataSource"/>
+            </map>
+        </property>
+        <!-- results in a setSomeSet(java.util.Set) call -->
+        <property name="someSet">
+            <set>
+                <value>just some string</value>
+                <ref bean="myDataSource" />
+            </set>
+        </property>
+    </bean>
+
+    <bean class="com.tamecode.spring.core.bean.collection.CollectionBean" id="parent">
+        <property name="adminEmails">
+            <props>
+                <prop key="administrator">administrator@example.com</prop>
+                <prop key="support">support@example.com</prop>
+            </props>
+        </property>
+    </bean>
+    <!--
+        子 Properties 集合的值集从父 < props/> 继承所有属性元素，子集合的支持值覆盖父集合中的值。
+        合并结果如下：
+        administrator=administrator@example.com
+        sales=sales@example.com
+        support=support@example.co.uk
+    -->
+    <bean id="child" parent="parent">
+        <property name="adminEmails">
+            <!-- the merge is specified on the child collection definition -->
+            <props merge="true"> <!-- merge 表示合并 -->
+                <prop key="sales">sales@example.com</prop>
+                <prop key="support">support@example.co.uk</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>

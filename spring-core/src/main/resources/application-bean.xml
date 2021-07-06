@@ -117,4 +117,22 @@
         </property>
     </bean>
 
+
+    <!-- inner beans
+        bean的嵌套使用
+     -->
+    <bean id="outBean" class="com.tamecode.spring.core.bean.SimpleMovieLister">
+        <!--
+            使用内置bean定义来替换 property ref 操作
+            内置 bean 不需要定义 id 和 name 属性，定义了也会被容器忽略，无意义
+            scope 标识也会被忽略
+            内部 bean 不能被注入
+        -->
+        <property name="movieFinder">
+            <bean id="innerBean" class="com.tamecode.spring.core.bean.SimpleBean">
+                <!--<property name=""-->
+            </bean>
+        </property>
+    </bean>
+
 </beans>
