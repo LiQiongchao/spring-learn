@@ -71,5 +71,20 @@
         </property>
     </bean>
 
+    <!--
+        赋值的形式
+    -->
+    <bean class="com.tamecode.spring.core.bean.ExampleBean" id="valueTest">
+        <!--
+            空值
+                <property name="ultimateAnswer" value=""/>
+                等于 exampleBean.setUltimateAnswer("");
+            null
+                <property name="ultimateAnswer"><null/></property>
+                等于 exampleBean.setUltimateAnswer(null);
+        -->
+        <property name="ultimateAnswer"><null/></property>
+    </bean>
+
 
 </beans>

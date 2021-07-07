@@ -10,6 +10,9 @@ public class ExampleBean {
     // The Answer to Life, the Universe, and Everything
     private String ultimateAnswer;
 
+    public ExampleBean() {
+    }
+
     /**
      * @ConstructorProperties 是用来指定参数的属性名的，当两个参数都为String时， 为了区分参数对应的属性名。
      * @param years
@@ -21,4 +24,19 @@ public class ExampleBean {
         this.ultimateAnswer = ultimateAnswer;
     }
 
+    public int getYears() {
+        return years;
+    }
+
+    public void setYears(int years) {
+        this.years = years;
+    }
+
+    public String getUltimateAnswer() {
+        return ultimateAnswer;
+    }
+
+    public void setUltimateAnswer(String ultimateAnswer) {
+        this.ultimateAnswer = ultimateAnswer;
+    }
 }
