@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -84,6 +86,38 @@
                 等于 exampleBean.setUltimateAnswer(null);
         -->
         <property name="ultimateAnswer"><null/></property>
+    </bean>
+
+    <!--
+        P命名空间（配置属性 Properties）
+        使用需要在 xml 中声明  xmlns:p="http://www.springframework.org/schema/p"
+        等于如下配置
+        <bean class="com.tamecode.spring.core.bean.ExampleBean" id="pNameSpace" >
+            <property name="ultimateAnswer" value="hello"/>
+        </bean>
+
+        可以配置属性，也可以配置属性引用。
+    -->
+    <bean class="com.tamecode.spring.core.bean.ExampleBean" id="pNameSpace" p:ultimateAnswer="hello"/>
+
+    <!--
+    C命名空间
+        使用需要在 xml 中声明 xmlns:c="http://www.springframework.org/schema/c"
+        代替使用 <constructor-arg> 的格式
+        也可以使用索引形式代替 c:_0="12" c:_1="hello"
+        建议使用名称符号
+    -->
+    <bean class="com.tamecode.spring.core.bean.ExampleBean" id="cNameSpace"
+          c:years="12"
+          c:ultimateAnswer="hello"
+    />
+
+    <!--
+    复合属性名称
+        除最终属性都不能为空。否则会发生 NPE 异常
+    -->
+    <bean class="com.tamecode.spring.core.bean.Person" id="compoundProp">
+        <property name="address.country" value="china"/>
     </bean>
 
 
