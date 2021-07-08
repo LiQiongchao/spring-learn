@@ -7,7 +7,10 @@
     <!--  import other xml config  -->
 
     <!--  classpath: 是指项目的 resources 的目录下。
-    classpath*: 是在所有项目（包括引用的项目）的resources目录下搜索 application-bean.xml 文件  -->
+    classpath*: 是在所有项目（包括引用的项目）的resources目录下搜索 application-bean.xml 文件
+    可以使用绝对路径和类路径，也可以使用相对路径（如：../service.xml不建议使用）
+    也可以通过在运行时根据 JVM 系统属性解析的“ ${ ... }”占位符
+    -->
     <!--<import resource="application-bean.xml"/>-->
     <import resource="classpath:application-bean.xml"/>
     <!-- <import resource="classpath*:application-bean.xml"/> -->
